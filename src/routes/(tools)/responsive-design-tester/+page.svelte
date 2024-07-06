@@ -3,9 +3,10 @@
     import { FontAwesomeIcon } from "@fortawesome/svelte-fontawesome";
     import { faShareNodes } from "@fortawesome/free-solid-svg-icons";
     import { faBars } from "@fortawesome/free-solid-svg-icons";
-    let defaultHeight = 1920;
-    let defaultWidth = 1080;
-    let url = "https://tailwindcss.com/docs/customizing-colors";
+    $: defaultHeight = null;
+    $: defaultWidth = null;
+    $: url = "";
+    let outputUrl = "";
 
     let resolutionObject = {
       
@@ -13,21 +14,12 @@
       twenty_two_inch_width: 1200,
     }
 
-    function dropDownPage(){
-      
+    function dropDownPage(url){
+      defaultHeight = 1920;
+      defaultWidth = 1080;
+      outputUrl = "https://tailwindcss.com/docs/customizing-colors";
     }
-/*
-    <div class="bg-light-gray overflow-y-auto py-5 px-3 h-full border-r border-gray-200">
 
-bg-light-gray overflow-y-auto py-5 px-3 h-full border-r border-gray-200
-<h1 class="text-3xl font-bold" contenteditable bind:textContent={title}></h1>
-<div class="grid grid-cols-2 items-center mb-3">
-  <main class="p-4 ml-60 h-auto">
-    <aside class="fixed top-0 left-0 z-40 w-60 h-screen">
-      <div class="bg-light-gray overflow-y-auto py-5 px-3 h-full border-r border-gray-200"> 
-
-
-*/
 </script>
 
 <div class="container mx-auto max-w-screen-xl flex flex-col lg:flex-row overflow-hidden rounded-lg">
@@ -48,61 +40,46 @@ bg-light-gray overflow-y-auto py-5 px-3 h-full border-r border-gray-200
     </div>
     <main class="flex-1 p-5">
         <div class="input-area mt-16 flex flex-row items-center">
-            <input type="text" placeholder="waguan" class="input-url" />
-            <button on:click={dropDownPage} class="bg-black hover:bg-black-900 text-white w-11 h-11 rounded">Go</button>
+            <input bind:innerHTML={url} contenteditable type="text" placeholder="" class="input-url" />
+            <button on:click={()=>dropDownPage(url)} class="bg-black hover:bg-black-900 text-white w-11 h-11 rounded">Go</button>
         </div>
-        <!--
-        <h1 class="text-3xl font-bold" contenteditable bind:textContent={title}></h1>
-        <div class="grid grid-cols-2 items-center mb-3">
-        <main class="p-4 ml-60 h-auto">
-        <aside class="fixed top-0 left-0 z-40 w-60 h-screen">
-        <div class="bg-light-gray overflow-y-auto py-5 px-3 h-full border-r border-gray-200"> 
-        -->
-
+        
         <div class="content mt-10">
-            <!-- New UI elements will be added here -->
-            <iframe src={url} height={defaultHeight} width={defaultWidth} title="drop-down-page"></iframe>
-            
-        </div>
+          <!-- New UI elements will be added here -->
+          <iframe src={outputUrl} height={defaultHeight} width={defaultWidth} title="drop-down-page"></iframe>
+          
+      </div>
     </main>
 </div>
 
-
-
 <style>
-    .container{
-        background-color: white;
-    }
-    .side {
-        box-shadow: 0 -1px 15px 2px rgb(0 0 0 / 0.7);
-    }
-    .fa-bars {
-        color: rgb(139, 139, 148);
-    }
-    .input-url {
-        background-color: rgb(183, 231, 233);
-        color: rgb(71, 69, 69);
-        padding: 10px;
-        padding-right: 0;
-        border: none;
-        border-radius: 5px;
-        width: 100%;
-    }
-    @media (min-width: 1024px) {
-        .container {
-            flex-direction: row;
-        }
-    }
-    .input-area {
-        display: flex;
-        gap: 10px; /* Adjust gap as needed */
-        align-items: center;
-        width: 100%;
-    }
-
-
-    
+  .container{
+      background-color: white;
+  }
+  .side {
+      box-shadow: 0 -1px 15px 2px rgb(0 0 0 / 0.7);
+  }
+  .fa-bars {
+      color: rgb(139, 139, 148);
+  }
+  .input-url {
+      background-color: rgb(183, 231, 233);
+      color: rgb(71, 69, 69);
+      padding: 10px;
+      padding-right: 0;
+      border: none;
+      border-radius: 5px;
+      width: 100%;
+  }
+  @media (min-width: 1024px) {
+      .container {
+          flex-direction: row;
+      }
+  }
+  .input-area {
+      display: flex;
+      gap: 10px; /* Adjust gap as needed */
+      align-items: center;
+      width: 100%;
+  }
 </style>
-
-
-
