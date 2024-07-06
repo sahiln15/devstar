@@ -5,8 +5,8 @@
     import { faBars } from "@fortawesome/free-solid-svg-icons";
     $: defaultHeight = null;
     $: defaultWidth = null;
-    $: url = "";
-    let outputUrl = "";
+    $: inputUrl = "";
+    $: storedUrl = "";
 
     let resolutionObject = {
       
@@ -14,10 +14,12 @@
       twenty_two_inch_width: 1200,
     }
 
-    function dropDownPage(url){
+    function dropDownPage(inputUrl){
       defaultHeight = 1920;
       defaultWidth = 1080;
-      outputUrl = url;
+
+      storedUrl = inputUrl;
+
     }
 
 </script>
@@ -73,12 +75,12 @@
   </div>
   <main class="flex-1 p-5">
       <div class="input-area mt-16 flex flex-row items-center">
-        <input bind:innerHTML={url} contenteditable type="text" placeholder="" class="input-url" />
-        <button on:click={()=>dropDownPage(url)} class="bg-black hover:bg-black-900 text-white w-11 h-11 rounded">Go</button>
+        <input  type="text" bind:value={inputUrl} placeholder="" class="input-url" />
+        <button on:click={()=>dropDownPage(inputUrl)} class="bg-black hover:bg-black-900 text-white w-11 h-11 rounded">Go</button>
       </div>
       <div class="content mt-10">
           <!-- New UI elements will be added here -->
-          <iframe src={outputUrl} height={defaultHeight} width={defaultWidth} title="drop-down-page"></iframe>          
+          <iframe src={storedUrl} height={defaultHeight} width={defaultWidth} title="drop-down-page"></iframe>          
       </div>
   </main>
 </div>
