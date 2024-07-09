@@ -25,7 +25,10 @@
     twenty_two_inch_height: 1920,
     twenty_two_inch_width: 1200,
   };
-
+  function resolutionUpdate(height, width) {
+    defaultHeight = height;
+    defaultWidth = width;
+  }
   function dropDownPage(inputUrl) {
     defaultHeight = 3840;
     defaultWidth = 2160;
@@ -38,46 +41,150 @@
 
     storedUrl = inputUrl;
   }
-  $:count = 0;
-  
-  function incrementForDesktop() {    
-    if(count % 2 == 0)  resDesktopIconClicked = true;
+  $: count = 0;
+
+  function incrementForDesktop() {
+    if (count % 2 == 0) resDesktopIconClicked = true;
     else resDesktopIconClicked = false;
     count += 1;
   }
 
   function incrementForTablet() {
     count += 1;
-    if(count % 2 == 0)  incrementForDesktop = true;
+    if (count % 2 == 0) incrementForDesktop = true;
     else incrementForDesktop = false;
   }
 
   function incrementForPhone() {
     count += 1;
-    if(count % 2 == 0)  resPhoneIconClicked = true;
+    if (count % 2 == 0) resPhoneIconClicked = true;
     else resPhoneIconClicked = false;
   }
-
 </script>
 
 <div
   class="container mx-auto max-w-screen-xl flex flex-col lg:flex-row overflow-hidden rounded-lg"
 >
+  {#if resDesktopIconClicked == true}
+    <div
+      class=" side hover:bg-emerald-400 bg-emerald-300 w-40 shadow-xl h-screen p-5 flex flex-col items-center py-48"
+    >
+      <button
+        on:click={() => resolutionUpdate(1920, 1200)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            24" Desktop<br />
+            <p style="color: blue;" class="resolution">1920x1200</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1920,1080)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            23" Desktop<br />
+            <p style="color: blue;" class="resolution">1920x1080</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1680,1050)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            22" Desktop<br />
+            <p style="color: blue;" class="resolution">1680x1050</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1920, 1200)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            21.5" Desktop<br />
+            <p style="color: blue;" class="resolution">1080x1920</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1600,900)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            20" Desktop<br />
+            <p style="color: blue;" class="resolution">1600x900</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1440,900)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            19" Desktop<br />
+            <p style="color: blue;" class="resolution">1440x900</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1366,768)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            15" Desktop<br />
+            <p style="color: blue;" class="resolution">1366x768</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1024,800)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            13" Desktop<br />
+            <p style="color: blue;" class="resolution">1024x800</p>
+          </li>
+        </ul>
+      </button>
+      <button
+        on:click={() => resolutionUpdate(1024,600)}
+        class="w-40 hover:bg-emerald-500"
+      >
+        <ul class=" submenu-desktop">
+          <li style="color: black" class="submenu-title">
+            10" Desktop<br />
+            <p style="color: blue;" class="resolution">1024x600</p>
+          </li>
+        </ul>
+      </button>
+      
+    </div>
+  {/if}
+
+  
+
   <!-- Add tool here -->
   <div
     class="side bg-blue-300 w-40 shadow-xl h-screen p-5 flex flex-col items-center py-48"
   >
     <!--<button>
       <FontAwesomeIcon class="w-14 h-14" icon={faRotateLeft} style="top"/>
-    </button>-->    
-      
+    </button>-->
+
+    
+
     <button on:click={incrementForDesktop}>
-      <FontAwesomeIcon class="w-14 h-14" icon={faDesktop} />
-      {resDesktopIconClicked}      
-    </button>
-    
-    
-    <button>
       <FontAwesomeIcon class="w-14 h-14" icon={faDesktop} />
     </button>
     <button class="flex flex-col justify-between items-center py-4">
@@ -118,6 +225,9 @@
 <style>
   .container {
     background-color: white;
+    max-height: 100%;
+    max-width: 100%;
+    border: 5px ridge blue;
   }
   .side {
     box-shadow: 0 -1px 15px 2px rgb(0 0 0 / 0.7);
@@ -152,5 +262,14 @@
     overflow-y: auto;
     overflow-x: auto;
     border: 5px ridge blue;
+  }
+
+  .submenu-desktop {
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    padding-right: 0;
+    border: none;
+    border-radius: 5px;
   }
 </style>
